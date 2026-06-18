@@ -1,126 +1,76 @@
-let completed = document.querySelector(".completed")
-let priority = document.querySelector(".priority")
-let taskName = document.querySelector(".task1")
-let taskDetails = document.querySelector(".details")
-let submit = document.querySelector(".create")
+let main = document.querySelector("main")
 let form = document.querySelector("form")
-let mode = document.querySelector(".mode")
-let leftBox = document.querySelector(".left-box")
-let rightBox = document.querySelector(".right-box")
-let nav = document.querySelector("nav")
-
-let task = document.querySelector(".task")
-
-let bg = true
-
-mode.addEventListener("click", function () {
-
-    if (bg == true) {
-        mode.textContent = "L"
-        let main = document.querySelector("main")
-        nav.classList.add("light-dark-1")
-        nav.classList.remove("repeat")
-        main.style.color = "white"
-        main.classList.add("dark")
-        leftBox.classList.add("light-dark-1")
-        rightBox.classList.add("light-dark-1")
-        leftBox.classList.remove("repeat")
-        rightBox.classList.add("repeat")
-        // task.classList.add("light-dark-2")
-        // rightBox.classList.remove("light-dark-2")
-
-        main.classList.remove("light")
-        bg = false
-    } else if (bg == false) {
-        mode.textContent = "D"
-        let main = document.querySelector("main")
-        main.style.color = "black"
-        nav.classList.add("repeat")
-        nav.classList.remove("light-dark-1")
-        leftBox.classList.add("repeat")
-        rightBox.classList.add("repeat")
-        leftBox.classList.remove("light-dark-1")
-        rightBox.classList.remove("light-dark-1")
-        main.classList.add("light")
-        main.classList.remove("dark")
-        bg = true
-    }
-})
-
-
-
 let taskDiv = document.querySelector(".tasks")
+let theam = document.querySelector(".mode")
 
-let tasksCard = [];
+let tasks = [];
+let editIdx = null;
 
-let ui = function () {
-
+let ui = function(){
     taskDiv.innerHTML = ""
-
-    tasksCard.forEach(function (elem, index) {
-        taskDiv.innerHTML += `<div class="task">
-                        <h2>${elem.name}</h2>
-                      
-                            <p>${elem.details}</p>
-                            <p class="pri">${elem.priorityN}</p>
-                        
-                        <div class="pen">Pending</div>
-                        <div class="btn">
-                            <button onclick = "editTask('${elem.name}')" class="edit">Edit</button>
-                            <button onclick = "completeTask('${index}')" class="completed">Completed</button>
-                            <button onclick = "deleteTask('${index}')" class="delete">Delete</button>
-                        </div>
-                    </div>`
-        console.log(index);
-
+    tasks.forEach(function(elem, idx){
+        taskDiv.innerHTML += `<div class="task ${elem.completed ? 'completed' : ''}">
+                <div class="manage">
+                    <h1>${elem.taskName}</h1>
+                    <p class="catagory" style="background-color: ${elem.completed ? 'royalblue' : ''}">${elem.catagory}</p>
+                </div>
+                <p>${elem.taskDetails}</p>
+                <div class="btns">
+                    <button onclick = "editTask(${idx})" class="edit">Edit</button>
+                    <button onclick="completedTask(${idx})" class="complete">Complete</button>
+                    <button onclick="deleteTask(${idx})" class="delete">Delete</button>
+                </div>
+            </div>`
     })
-
-
 }
 
-form.addEventListener("submit", function (event) {
-
-    // taskDiv.innerHTML = ""
-
+form.addEventListener("submit", function(event){
     event.preventDefault();
-    let name = event.target[0].value
-    let details = event.target[1].value
-    let priorityN = priority.value
 
+    let taskName = event.target[0].value
+    let taskDetails = event.target[1].value
+    let catagory = event.target[2].value
 
-    if (name.trim() === "" || details.trim() === "") {
-        alert("Fill all the forms")
+    if(taskName.trim() === "" || taskDetails.trim() === ""){
+        alert("Fill all the places");
         return;
     }
 
     let obj = {
-        name,
-        details,
-        priorityN
+        taskName,
+        taskDetails,
+        catagory,
+        completed: false 
     }
 
+     if(editIdx !== null){
+        // ✅ update existing task
+        tasks[editIdx].taskName = taskName
+        tasks[editIdx].taskDetails = taskDetails
+        tasks[editIdx].catagory = catagory
+        editIdx = null   // reset after editing
+    } else {
+        // ✅ add new task
+        tasks.push({ taskName, taskDetails, catagory, completed: false })
+    }
 
-    tasksCard.push(obj)
     ui()
     form.reset()
 })
-ui()
 
-function editTask(name) {
-    let taskE = tasksCard.find((elem) => elem.name === name)
-    form[0].value = taskE.name,
-        form[1].value = taskE.details
-}
-
-
-function deleteTask(index) {
-    tasksCard.splice(index, 1);
+function deleteTask(idx){ 
+    tasks.splice(idx, 1);
     ui()
 }
-function completeTask(index) {
-    let allTasks = document.querySelectorAll(".task")  // ✅ get all task cards
-    let targetTask = allTasks[index]
-    let pendingDiv = targetTask.querySelector(".pen")  // ✅ find .pen inside that specific task
-    pendingDiv.textContent = "Completed"
-    pendingDiv.style.backgroundColor = "yellow"
-} 
+
+function completedTask(idx){
+    tasks[idx].completed = true 
+    ui()
+}
+
+function editTask(idx){
+     form[0].value = tasks[idx].taskName      // fill task name
+    form[1].value = tasks[idx].taskDetails   // fill task details
+    form[2].value = tasks[idx].catagory
+    editIdx = idx 
+}
