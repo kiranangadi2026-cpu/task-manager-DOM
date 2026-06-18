@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <main>
+        <nav>
+            <h1>Task Manager</h1>
+            <h3 class="mode">D</h3>
+        </nav>
+        <div class="down">
+            <div class="left-box">
+                <div class="form">
+                    <h2>Create Task</h2>
+                    <form>
+                        <input type="text" placeholder="HeadLine" class="task1">
+                        <textarea style="resize: none;" placeholder="Enter the details" class="details"></textarea>
+                        <select class="priority">
+                            <option value="">-- Select Priority --</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                        <button class="create">Create</button>
+                    </form>
+                </div>
+            </div>
+            <div class="right-box">
+                <div class="tasks">
+                </div>
+
+            </div>
+        </div>
+        <section class="section-pipline">
+            <h1>Browser Rendering Pipline</h1>
+            <p>How the browser converts HTML and CSS into pixels you see on screen</p>
+            <div class="pipline-1">
+                <div class="box-pip">
+                    <h1>HTML</h1>
+                    <p>Raw HTML Document</p>
+                </div>
+                <h1><i class="ri-arrow-down-long-line"></i></h1>
+                <div class="box-pip">
+                    <h1>Parsing</h1>
+                    <p>Convert bytes to characters</p>
+                </div>
+                <h1><i class="ri-arrow-down-long-line"></i></h1>
+                <div class="box-pip">
+                    <h1>Tokenization</h1>
+                    <p>Break into meaningful tokens</p>
+                </div>
+                <h1><i class="ri-arrow-down-long-line"></i></h1>
+                <div class="box-pip">
+                    <h1>DOM Tree</h1>
+                    <p>Tree of DOM nodes</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
