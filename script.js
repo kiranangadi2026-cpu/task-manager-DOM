@@ -12,12 +12,12 @@ let ui = function(){
         taskDiv.innerHTML += `<div class="task ${elem.completed ? 'completed' : ''}">
                 <div class="manage">
                     <h1>${elem.taskName}</h1>
-                    <p class="catagory" style="background-color: ${elem.completed ? 'royalblue' : ''}">${elem.catagory}</p>
+                    <p class="catagory" >${elem.catagory}</p>
                 </div>
                 <p>${elem.taskDetails}</p>
                 <div class="btns">
                     <button onclick = "editTask(${idx})" class="edit">Edit</button>
-                    <button onclick="completedTask(${idx})" class="complete">Complete</button>
+                    <button onclick="completedTask(${idx})" class="complete" style="background-color: ${elem.completed ? 'royalblue' : ''}">Complete</button>
                     <button onclick="deleteTask(${idx})" class="delete">Delete</button>
                 </div>
             </div>`
@@ -65,6 +65,7 @@ function deleteTask(idx){
 
 function completedTask(idx){
     tasks[idx].completed = true 
+
     ui()
 }
 
