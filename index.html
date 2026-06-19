@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task Manager</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -13,7 +14,7 @@
         <nav>
             <h2>Tasks</h2>
             <div class="btn">
-                <button class="mode">Mode</button>
+                <button class="mode">Theam</button>
             </div>
         </nav>
         <div class="form">
@@ -33,6 +34,53 @@
         <h1 class="h1">Tasks will appear Here....</h1>
         <div class="tasks">
         </div>
+        <section class="child">
+            <h2>Even Propagation Demo</h2>
+            <div class="box-grand">
+                <h3>GrandParent</h3>
+                <p>Capture/Bubble</p>
+                <div class="box-parent">
+                    <h3>Parent</h3>
+                    <p>Capture/Bubble</p>
+                    <div class="box-child">
+                        <h3>Child</h3>
+                        <p>(click here)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="result">
+            <div class="inner-result">
+                <p>Console Output:</p>
+                <p>Bubbline Order:</p>
+                <p>Child -> parent -> GrandParent</p>
+                <p>Note: Every Bubbling starts(Child) from a element where it is clicked</p>
+            </div>
+        </section>
+        <section class="tree-section">
+            <h3 style="font-size: 30px;">Browser Rendering Pipline</h3>
+            <div class="first">
+                <h2>HTML</h2>
+                <h3><i class="ri-arrow-down-long-line"></i></h3>
+                <h2>PARSING</h2>
+                <h3><i class="ri-arrow-down-long-line"></i></h3>
+                <h2>TOKANIZATION</h2>
+                <h3><i class="ri-arrow-down-long-line"></i></h3>
+                <h2>DOM TREE</h2>
+            </div>
+            <div class="second">
+                <h3><i class="ri-arrow-down-long-line"></i></h3>
+                <h2>CSS</h2>
+                <h3><i class="ri-arrow-down-long-line"></i></h3>
+                <h2>CSSOM TREE</h2>
+                <h3><i class="ri-arrow-down-long-line"></i></h3>
+            </div>
+            <div class="third">
+                <h2>DOM TREE + CSSOM TREE</h2>
+                <h3><i class="ri-arrow-down-long-line"></i></h3>
+                <h2>RENDER TREE</h2>
+            </div>
+        </section>
     </main>
 
 
